@@ -27,18 +27,14 @@ public class DialogueState : BaseFrameState
 
     public override void Show()
     {
-        m_CharacterText.SetLine(m_Text);
-        m_CharacterText.SetName(m_CharacterName);
+        ShowHeader();
     }
 }
 public class TextState : BaseFrameState
 {
-   
-
     public override void Show()
     {
-        m_CharacterText.SetLine(m_Text);
-        m_CharacterText.SetName(m_CharacterName);
+        ShowHeader();
     }
 }
 
@@ -47,21 +43,19 @@ public class FinalState : BaseFrameState
     
     public override void Show()
     {
-        m_CharacterText.SetLine(m_Text);
-        m_CharacterText.SetName(m_CharacterName);
+        ShowHeader();
     }
 }
 
 public class OptionState : BaseFrameState
 {
     Button m_DefaultButton;
-    CharacterTextReply m_Replies;
+    DialogueReplies m_Replies;
     List<Option> m_Options;
     protected Action<string> m_NextFrame;
-    public OptionState(Button defaultButton, CharacterTextReply replies,  List<Option> options, Action<string>next)
+    public OptionState(Button defaultButton, DialogueReplies replies,  List<Option> options, Action<string>next)
     {
         m_DefaultButton = defaultButton;
-       
         m_Replies = replies;
         m_Options = options;
         m_NextFrame = next;
@@ -82,7 +76,8 @@ public class OptionState : BaseFrameState
 
     public override void Show()
     {
-        // show options 
+        ShowHeader();
+        
         foreach (var option in m_Options)
         {
             m_Replies.AddChoice(option.choice,option.targetFrameId, m_NextFrame);

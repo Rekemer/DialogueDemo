@@ -23,12 +23,12 @@ public class Option
 public class Frame
 {
     public FrameType type;
-    public string nextId;          // for Dialogue, Text (auto-advance)
+    public string nextId;          
     public string id;
-    public string characterName;   // only for Dialogue
+    public string characterName;   
     public string spritePosition;
-    public string text;            // for Dialogue & Text & Choice title
-    public List<Option> options;   // only for Choice
+    public string text;            
+    public List<Option> options;   
 
 
     public override string ToString()

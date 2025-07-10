@@ -13,7 +13,7 @@
       "id": "txt_breeze",
       "type": 1,
       "text": "A cool breeze greets you as you step outside the castle gates.",
-      "nextId": "dlg_ranger"
+      "nextId": "choice_first"
     },
     {
       "id": "choice_first",
@@ -33,7 +33,6 @@
     {
       "id": "dlg_ranger",
       "type": 0,
-      "spriteName": "Ranger_guide",
       "spritePosition": "left",
       "characterName": "Ranger",
       "text": "Stay on the path, traveller. The woods are wild after dusk.",

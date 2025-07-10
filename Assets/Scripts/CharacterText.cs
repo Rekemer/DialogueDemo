@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class CharacterText : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI characterName;
-    [SerializeField] TextMeshProUGUI characterLine;
+    [SerializeField] TextMeshProUGUI CharacterName;
+    [SerializeField] TextMeshProUGUI CharacterLine;
 
     public void SetName(string name)
     {
-        characterName.text = name;
+        CharacterName.text = name;
     }
     public void SetLine(string line)
     {
-        characterLine.text = line;
+        CharacterLine.text = line;
     }
 }

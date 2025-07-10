@@ -2,9 +2,14 @@ using System.Threading.Tasks;
 using System.IO;
 public class JsonStoryLoader : IStoryLoader
 {
-    public  StoryData Load(string fileName)
+    public  StoryData LoadFromFile(string fileName)
     {
         var json =  File.ReadAllText(fileName);
-        return UnityEngine.JsonUtility.FromJson<StoryData>(json);
+        return LoadFromString(json);
+    }
+
+    public StoryData LoadFromString(string text)
+    {
+        return UnityEngine.JsonUtility.FromJson<StoryData>(text);
     }
 }

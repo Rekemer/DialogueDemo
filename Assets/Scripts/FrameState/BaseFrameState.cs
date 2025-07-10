@@ -16,6 +16,11 @@ public abstract class BaseFrameState
         m_CharacterName= characterName;
         m_CharacterText = characterText;
     }
+    protected void ShowHeader()
+    {
+        m_CharacterText.SetName(m_CharacterName);
+        m_CharacterText.SetLine(m_Text);
+    }
 
     public virtual  void OnEnter() { }
     public abstract void Show();
