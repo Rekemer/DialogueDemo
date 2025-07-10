@@ -5,18 +5,18 @@ using System;
 public enum FrameType
 { 
     // greeting, beginning of the dialogue
-    Dialogue, 
+    Dialogue = 0, 
     // character's text
-    Text,
+    Text = 1,
     // user response
-    Option, 
+    Option = 2, 
     // last text user reads before dialogue ends
-    Final 
+    Final = 3 
 }
 [Serializable]
 public class Option
 {
-    public string title;
+    public string choice;
     public string targetFrameId;
 }
 [Serializable]
@@ -26,6 +26,7 @@ public class Frame
     public string nextId;          // for Dialogue, Text (auto-advance)
     public string id;
     public string characterName;   // only for Dialogue
+    public string spritePosition;
     public string text;            // for Dialogue & Text & Choice title
     public List<Option> options;   // only for Choice
 
@@ -37,8 +38,6 @@ public class Frame
 
         sb.AppendLine($"Frame  id: {id}");
         sb.AppendLine($"       type: {type}");
-        if (!string.IsNullOrEmpty(spriteName))
-            sb.AppendLine($"       sprite: {spriteName}");
         if (!string.IsNullOrEmpty(characterName))
             sb.AppendLine($"       character: {characterName}");
         sb.AppendLine($"       text: \"{text}\"");
@@ -47,7 +46,7 @@ public class Frame
         {
             sb.AppendLine("       options:");
             foreach (var o in options)
-                sb.AppendLine($"         • {o.title}  →  {o.targetFrameId}");
+                sb.AppendLine($"         • {o.choice}  →  {o.targetFrameId}");
         }
 
         if (!string.IsNullOrEmpty(nextId))

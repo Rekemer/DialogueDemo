@@ -1,80 +1,91 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 public class DialogueState : BaseFrameState
 {
-    public override void OnEnter()
+    Character m_Character;
+    bool m_IsLeft;
+    public DialogueState(Character character, bool isLeft)
     {
-        throw new System.NotImplementedException();
+        m_Character = character;
+        m_IsLeft = isLeft;
     }
 
-    public override void OnExit()
+    public override void OnEnter()
     {
-        throw new System.NotImplementedException();
+
+        base.OnEnter();
+        if (m_IsLeft)
+            m_Character.SetLeft();
+        else
+            m_Character.SetRight();
     }
 
     public override void Show()
     {
-        throw new System.NotImplementedException();
+        m_CharacterText.SetLine(m_Text);
+        m_CharacterText.SetName(m_CharacterName);
     }
 }
 public class TextState : BaseFrameState
 {
-    public override void OnEnter()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void OnExit()
-    {
-        throw new System.NotImplementedException();
-    }
+   
 
     public override void Show()
     {
-        throw new System.NotImplementedException();
+        m_CharacterText.SetLine(m_Text);
+        m_CharacterText.SetName(m_CharacterName);
     }
 }
 
 public class FinalState : BaseFrameState
 {
-    public override void OnEnter()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void OnExit()
-    {
-        throw new System.NotImplementedException();
-    }
-
+    
     public override void Show()
     {
-        throw new System.NotImplementedException();
+        m_CharacterText.SetLine(m_Text);
+        m_CharacterText.SetName(m_CharacterName);
     }
 }
 
 public class OptionState : BaseFrameState
 {
     Button m_DefaultButton;
-    public OptionState(Button defaultButton)
+    CharacterTextReply m_Replies;
+    List<Option> m_Options;
+    protected Action<string> m_NextFrame;
+    public OptionState(Button defaultButton, CharacterTextReply replies,  List<Option> options, Action<string>next)
     {
         m_DefaultButton = defaultButton;
+       
+        m_Replies = replies;
+        m_Options = options;
+        m_NextFrame = next;
     }
 
     public override void OnEnter()
     {
         m_DefaultButton.interactable = false;
+        m_Replies.Reset();
+        m_Replies.gameObject.SetActive(true);
     }
 
     public override void OnExit()
     {
         m_DefaultButton.interactable = true;
+        m_Replies.gameObject.SetActive(false);
     }
 
     public override void Show()
     {
         // show options 
-        throw new System.NotImplementedException();
+        foreach (var option in m_Options)
+        {
+            m_Replies.AddChoice(option.choice,option.targetFrameId, m_NextFrame);
+        }
     }
 }

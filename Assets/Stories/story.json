@@ -1,45 +1,52 @@
 {
+
   "frames": [
     {
       "id": "dlg_intro",
-      "type": "Dialogue",
+      "type": 0,
       "characterName": "Alice",
       "spritePosition": "right",
       "text": "Hello, Sailor!",
       "nextId": "txt_breeze"
     },
     {
-      "id": "txt_1",
-      "type": "Text",
+      "id": "txt_breeze",
+      "type": 1,
       "text": "A cool breeze greets you as you step outside the castle gates.",
-      "nextId": "choice_first"
+      "nextId": "dlg_ranger"
     },
     {
       "id": "choice_first",
-      "type": "Choice",
+      "type": 2,
       "text": "What will you do?",
       "options": [
-        { "title": "Explore the forest", "targetFrameId": "dlg_ranger" },
-        { "title": "Return to the castle", "targetFrameId": "final_return" }
+        {
+          "choice": "Explore the forest",
+          "targetFrameId": "dlg_ranger"
+        },
+        {
+          "choice": "Return to the castle",
+          "targetFrameId": "final_return"
+        }
       ]
     },
     {
       "id": "dlg_ranger",
-      "type": "Dialogue",
+      "type": 0,
       "spriteName": "Ranger_guide",
-      "spritePosition": "right",
+      "spritePosition": "left",
       "characterName": "Ranger",
       "text": "Stay on the path, traveller. The woods are wild after dusk.",
       "nextId": "final_forest"
     },
     {
       "id": "final_return",
-      "type": "Final",
+      "type": 3,
       "text": "You head back to the castle. Chapter complete!"
     },
     {
       "id": "final_forest",
-      "type": "Final",
+      "type": 3,
       "text": "Your forest adventure begins… Chapter complete!"
     }
   ]
