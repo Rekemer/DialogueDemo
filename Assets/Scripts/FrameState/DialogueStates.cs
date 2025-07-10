@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
-using static System.Net.Mime.MediaTypeNames;
+
 
 public class DialogueState : BaseFrameState
 {

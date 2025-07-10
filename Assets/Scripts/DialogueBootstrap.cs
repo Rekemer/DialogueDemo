@@ -7,7 +7,11 @@ public class DialogueBootstrap : MonoBehaviour
     void Awake()
     {
         var provider = new JsonStoryLoader();
-        if (StoryJson == null) Debug.LogError("Story field is not initialized!");
+        if (StoryJson == null) 
+        {
+            Debug.LogError("Story field is not initialized!");
+            enabled = false;
+        }
         var story = provider.LoadFromString(StoryJson.text);
         GetComponent<DialogueManager>().BuildStates(story);
     }

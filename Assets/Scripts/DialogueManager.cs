@@ -1,12 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
-using System.Globalization;
-using System.IO;
-using UnityEngine.Analytics;
-using UnityEngine.TextCore.Text;
+
 
 [RequireComponent(typeof(DialogueBootstrap))]   
 public class DialogueManager : MonoBehaviour
@@ -16,6 +12,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] CharacterText CharacterText;
     [SerializeField] DialogueReplies Replies;
     [SerializeField] Character Character;
+    public event Action StoryFinished;
 
     Dictionary<string, BaseFrameState> m_Frames;
     BaseFrameState m_CurrentState;
@@ -24,13 +21,13 @@ public class DialogueManager : MonoBehaviour
 
     BaseFrameState CreateState(Frame f, Button defaultDialogueButton)
     {
-        // helper that runs Init once and returns the fully-prepared state
+       
         BaseFrameState Init(BaseFrameState s)
         {
-            s.Init(f.nextId,            // shared data
+            s.Init(f.nextId,            
                    f.text,
                    f.characterName,
-                   CharacterText);  // the single header view
+                   CharacterText);  
             return s;
         }
 
@@ -44,46 +41,13 @@ public class DialogueManager : MonoBehaviour
 
             case FrameType.Final: return Init(new FinalState());
 
-            case FrameType.Option:
-                return Init(
-                                          new OptionState(
-                                             defaultDialogueButton, Replies, f.options, NextTo)                   // callback
-                                       );
+            case FrameType.Option: return Init( new OptionState( defaultDialogueButton, Replies, f.options, NextTo));
 
             default:
                 throw new ArgumentOutOfRangeException(
                     $"Unknown frame type {f.type}");
         }
     }
-
-    //public BaseFrameState CreateState(Frame f, Button dialogue)
-    //{
-    //    BaseFrameState state;
-
-    //    switch (f.type)
-    //    {
-    //        case FrameType.Dialogue:
-    //            {
-    //                if (f.spritePosition == null)
-    //                {
-    //                    Debug.LogWarning("dialogue has unspecified position of character");
-    //                }
-    //                state = new DialogueState(Character, f.spritePosition?.ToLower() != "right");
-    //                break;
-    //            }
-
-    //        case FrameType.Text: state = new TextState() ;break;
-    //        case FrameType.Final: state = new FinalState() ;break;
-    //        case FrameType.Option: state = new OptionState(dialogue, Replies,f.options, NextTo); break;
-    //        default:
-    //        {
-    //          Debug.LogError("Cannot create Frametype");
-    //          return null;
-    //        }
-    //    }
-    //    state.Init(f.nextId, f.text, f.characterName, CharacterText);
-    //    return state;
-    //}
 
     public void BuildStates(StoryData stories)
     {
@@ -108,11 +72,12 @@ public class DialogueManager : MonoBehaviour
     }
     public void NextTo(string key)
     {
-        m_CurrentState.OnExit();
 
         if (key != null && m_Frames.ContainsKey(key))
         {
 
+            m_CurrentState.OnExit();
+            
             m_CurrentState = m_Frames[key];
 
             m_CurrentState.OnEnter();
@@ -123,6 +88,7 @@ public class DialogueManager : MonoBehaviour
         else
         {
             Debug.Log("Story has ended");
+            StoryFinished?.Invoke();
         }
 
     }
@@ -131,11 +97,13 @@ public class DialogueManager : MonoBehaviour
         if (DefaultDialogueButton == null)
         {
             Debug.LogError("Default Dialogue Button field is not initialized");
+            enabled = false;
             return;
         }
         if (Character == null || Replies == null)
         {
             Debug.LogError("Character fields are not initialized");
+            enabled = false;
             return;
         }
         ;    

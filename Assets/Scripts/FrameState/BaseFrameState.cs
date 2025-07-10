@@ -1,5 +1,3 @@
-using System;
-
 public abstract class BaseFrameState
 {
     protected string m_Text;

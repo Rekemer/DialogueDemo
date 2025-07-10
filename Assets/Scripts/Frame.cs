@@ -1,5 +1,4 @@
-﻿using static UnityEditor.Experimental.GraphView.GraphView;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 
 public enum FrameType

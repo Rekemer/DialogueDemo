@@ -70,7 +70,7 @@
       "id": "dlg_stream",
       "type": 0,
       "characterName": "Narrator",
-      "spritePosition": "",
+      "spritePosition": "left",
       "text": "A clear stream blocks your way; the current looks strong.",
       "nextId": "final_wet"
     },
@@ -79,7 +79,7 @@
       "id": "dlg_cliff",
       "type": 0,
       "characterName": "Narrator",
-      "spritePosition": "",
+      "spritePosition": "left",
       "text": "You slip on loose gravel and tumble back down!",
       "nextId": "final_fall"
     },
@@ -127,7 +127,7 @@
       "id": "dlg_nothanks",
       "type": 0,
       "characterName": "Old Sailor",
-      "spritePosition": "right",
+      "spritePosition": "left",
       "text": "Suit yourself. Don’t blame me if ye get lost.",
       "nextId": "final_storm"
     },
