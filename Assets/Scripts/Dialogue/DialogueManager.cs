@@ -4,6 +4,7 @@ using System;
 using UnityEngine.UI;
 
 
+
 [RequireComponent(typeof(DialogueBootstrap))]   
 public class DialogueManager : MonoBehaviour
 {
@@ -13,40 +14,57 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] DialogueReplies Replies;
     [SerializeField] Character Character;
     public event Action StoryFinished;
-
+    FrameStateFactory m_StateFactory;
+    
     Dictionary<string, BaseFrameState> m_Frames;
     BaseFrameState m_CurrentState;
     string m_StartKey;
 
-
-    BaseFrameState CreateState(Frame f, Button defaultDialogueButton)
+    public void Init()
     {
-       
-        BaseFrameState Init(BaseFrameState s)
+
+        m_StateFactory = new FrameStateFactory();
+        BaseFrameState Init(BaseFrameState s, Frame f)
         {
-            s.Init(f.nextId,            
+            s.Init(f.nextId,
                    f.text,
                    f.characterName,
-                   CharacterText);  
+                   CharacterText);
             return s;
         }
+        m_StateFactory.Register(FrameType.Dialogue,
+            f => {
+                bool left = f.spritePosition?.ToLower() != "right";
+                var s = new DialogueState(Character, left);
+                Init(s,f);
+                return s;
+            });
 
-        bool left = f.spritePosition?.ToLower() != "right";
+        m_StateFactory.Register(FrameType.Text,
+            f => {
+                var s = new TextState();
+                Init(s,f);
+                return s;
+            });
 
-        switch (f.type)
-        {
-            case FrameType.Dialogue: return Init(new DialogueState(Character, left));
+        m_StateFactory.Register(FrameType.Final,
+            f => {
+                var s = new FinalState();
+                Init(s,f);
+                return s;
+            });
 
-            case FrameType.Text: return Init(new TextState());
+        m_StateFactory.Register(FrameType.Option,
+            f => {
+                var s = new OptionState(DefaultDialogueButton, Replies, f.options, NextTo);
+                Init(s,f);               
+                return s;
+            });
 
-            case FrameType.Final: return Init(new FinalState());
-
-            case FrameType.Option: return Init( new OptionState( defaultDialogueButton, Replies, f.options, NextTo));
-
-            default:
-                throw new ArgumentOutOfRangeException(
-                    $"Unknown frame type {f.type}");
-        }
+    }
+    BaseFrameState CreateState(Frame f, Button defaultDialogueButton)
+    {
+        return m_StateFactory.Create(f);
     }
 
     public void BuildStates(StoryData stories)
@@ -55,7 +73,6 @@ public class DialogueManager : MonoBehaviour
         // populate maps of states
         foreach (var s in stories.frames)
         {
-
             m_Frames[s.id] = CreateState(s, DefaultDialogueButton);
             // initialize start state
             if (m_CurrentState == null && s.type == FrameType.Dialogue)
@@ -112,6 +129,18 @@ public class DialogueManager : MonoBehaviour
     {
         NextTo(m_StartKey);
     }
-    
-    
+}
+
+public class FrameStateFactory
+{
+    private readonly Dictionary<FrameType, Func<Frame, BaseFrameState>> m_InitMap = new();
+
+    public void Register(FrameType type, Func<Frame, BaseFrameState> ctor) => m_InitMap[type] = ctor;
+
+    public BaseFrameState Create(Frame frame)
+    {
+        return m_InitMap.TryGetValue(frame.type, out var initFunc)
+           ? initFunc(frame)
+           : throw new ArgumentOutOfRangeException($"There is no initialization for {frame.type}");
+    }
 }

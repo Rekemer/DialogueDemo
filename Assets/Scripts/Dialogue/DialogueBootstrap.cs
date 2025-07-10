@@ -13,6 +13,7 @@ public class DialogueBootstrap : MonoBehaviour
             enabled = false;
         }
         var story = provider.LoadFromString(StoryJson.text);
+        GetComponent<DialogueManager>().Init();
         GetComponent<DialogueManager>().BuildStates(story);
     }
 }

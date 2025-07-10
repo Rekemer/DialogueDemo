@@ -1,0 +1,19 @@
+{
+    "name": "Dialogue",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ef2fd94eff44d5e4db3528b5fec88b47",
+        "GUID:1c4a56f0d69d5a040a5d1d5452a77fdf",
+        "GUID:3c5360ebeaf24754f88559e50c3e67c6",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

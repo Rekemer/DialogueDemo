@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
 
-public class DialogueReplies: MonoBehaviour
+public class DialogueReplies: MonoBehaviour, IRepliesView
 { 
     [SerializeField] List<Button> Replies;
     [SerializeField, Range(1, 4)] int maxOptions = 4;
