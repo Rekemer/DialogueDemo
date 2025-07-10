@@ -1,52 +1,162 @@
 {
-
   "frames": [
     {
       "id": "dlg_intro",
       "type": 0,
       "characterName": "Alice",
       "spritePosition": "right",
-      "text": "Hello, Sailor!",
-      "nextId": "txt_breeze"
+      "text": "Ready for an adventure?",
+      "nextId": "txt_depart"
     },
+
     {
-      "id": "txt_breeze",
+      "id": "txt_depart",
       "type": 1,
-      "text": "A cool breeze greets you as you step outside the castle gates.",
-      "nextId": "choice_first"
+      "text": "You stand at the crossroads outside the castle.",
+      "nextId": "choice_crossroads"
     },
+
     {
-      "id": "choice_first",
+      "id": "choice_crossroads",
       "type": 2,
-      "text": "What will you do?",
+      "text": "Which road will you take?",
       "options": [
         {
-          "choice": "Explore the forest",
+          "choice": "North — the forest road",
           "targetFrameId": "dlg_ranger"
         },
         {
-          "choice": "Return to the castle",
+          "choice": "East — toward the coast",
+          "targetFrameId": "dlg_sailor"
+        },
+        {
+          "choice": "Back to the castle",
           "targetFrameId": "final_return"
         }
       ]
     },
+
+ 
     {
       "id": "dlg_ranger",
       "type": 0,
-      "spritePosition": "left",
       "characterName": "Ranger",
-      "text": "Stay on the path, traveller. The woods are wild after dusk.",
-      "nextId": "final_forest"
+      "spritePosition": "left",
+      "text": "Keep your eyes open; wolves roam these woods.",
+      "nextId": "choice_forest"
     },
+
+    {
+      "id": "choice_forest",
+      "type": 2,
+      "text": "You find a fork in the overgrown path.",
+      "options": [
+        {
+          "choice": "Follow the sound of water",
+          "targetFrameId": "dlg_stream"
+        },
+        {
+          "choice": "Climb the rocky hill",
+          "targetFrameId": "dlg_cliff"
+        },
+        {
+          "choice": "Return to the crossroads",
+          "targetFrameId": "choice_crossroads"
+        }
+      ]
+    },
+
+    {
+      "id": "dlg_stream",
+      "type": 0,
+      "characterName": "Narrator",
+      "spritePosition": "",
+      "text": "A clear stream blocks your way; the current looks strong.",
+      "nextId": "final_wet"
+    },
+
+    {
+      "id": "dlg_cliff",
+      "type": 0,
+      "characterName": "Narrator",
+      "spritePosition": "",
+      "text": "You slip on loose gravel and tumble back down!",
+      "nextId": "final_fall"
+    },
+
+   
+    {
+      "id": "dlg_sailor",
+      "type": 0,
+      "characterName": "Old Sailor",
+      "spritePosition": "right",
+      "text": "Storm’s brewin’, youngster. Best have a map.",
+      "nextId": "choice_coast"
+    },
+
+    {
+      "id": "choice_coast",
+      "type": 2,
+      "text": "Do you buy the sailor’s map?",
+      "options": [
+        {
+          "choice": "Buy the map (2 coins)",
+          "targetFrameId": "dlg_buyMap"
+        },
+        {
+          "choice": "Refuse politely",
+          "targetFrameId": "dlg_nothanks"
+        },
+        {
+          "choice": "Return to the crossroads",
+          "targetFrameId": "choice_crossroads"
+        }
+      ]
+    },
+
+    {
+      "id": "dlg_buyMap",
+      "type": 0,
+      "characterName": "Old Sailor",
+      "spritePosition": "right",
+      "text": "Pleasure doin’ business. The map shows a hidden cove.",
+      "nextId": "final_cove"
+    },
+
+    {
+      "id": "dlg_nothanks",
+      "type": 0,
+      "characterName": "Old Sailor",
+      "spritePosition": "right",
+      "text": "Suit yourself. Don’t blame me if ye get lost.",
+      "nextId": "final_storm"
+    },
+
+   
     {
       "id": "final_return",
       "type": 3,
       "text": "You head back to the castle. Chapter complete!"
     },
     {
-      "id": "final_forest",
+      "id": "final_wet",
       "type": 3,
-      "text": "Your forest adventure begins… Chapter complete!"
+      "text": "Swept away by the stream, you barely survive. Chapter complete!"
+    },
+    {
+      "id": "final_fall",
+      "type": 3,
+      "text": "Tumbled and bruised, you decide adventuring can wait. Chapter complete!"
+    },
+    {
+      "id": "final_cove",
+      "type": 3,
+      "text": "The hidden cove holds a treasure chest… Chapter complete!"
+    },
+    {
+      "id": "final_storm",
+      "type": 3,
+      "text": "A storm strands you on the coast with no bearings. Chapter complete!"
     }
   ]
 }
