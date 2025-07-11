@@ -4,7 +4,7 @@
 |---------|---------|
 | **State-pattern core** | `DialogueState`, `TextState`, `OptionState`, `FinalState` represent the state of a dialogue. |
 | **Data-driven** | Dialogues are described by a single JSON file (`Stories/story.json`)
-| **Assembly Definitions** | Code is divided live in their own asmdef, speeding up compile times. |
+| **Assembly Definitions** | Code is divided in their own asmdef, speeding up compile times. |
 
 | |  |
 |----|----|
