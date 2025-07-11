@@ -2,7 +2,7 @@
 
 | Feature | Details |
 |---------|---------|
-| **State-pattern core** | `BaseFrameState` + concrete states (`DialogueState`, `TextState`, `OptionState`, `FinalState`) keep logic self-contained and reusable. |
+| **State-pattern core** | `DialogueState`, `TextState`, `OptionState`, `FinalState` represent the state of a dialogue. |
 | **Data-driven** | Dialogues are described by a single JSON file (`Stories/story.json`)
 | **Assembly Definitions** | Code is divided live in their own asmdef, speeding up compile times. |
 
