@@ -4,7 +4,7 @@
 |---------|---------|
 | **State-pattern core** | `BaseFrameState` + concrete states (`DialogueState`, `TextState`, `OptionState`, `FinalState`) keep logic self-contained and reusable. |
 | **Data-driven** | Dialogues are described by a single JSON file (`Stories/story.json`)
-| **Assembly Definitions** | Dialogues live in their own asmdef, speeding up compile times and keeping editor code out of player builds. |
+| **Assembly Definitions** | Code is divided live in their own asmdef, speeding up compile times. |
 
 | |  |
 |----|----|
