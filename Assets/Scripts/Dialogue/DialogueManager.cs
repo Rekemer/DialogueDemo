@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     
-    [SerializeField] Button DefaultDialogueButton;
+    IClickable DefaultDialogueButton;
     [SerializeField] CharacterText CharacterText;
     [SerializeField] DialogueReplies Replies;
     [SerializeField] Character Character;
@@ -22,7 +22,7 @@ public class DialogueManager : MonoBehaviour
 
     public void Init()
     {
-
+        DefaultDialogueButton = GetComponent<IClickable>();
         m_StateFactory = new FrameStateFactory();
         BaseFrameState Init(BaseFrameState s, Frame f)
         {
@@ -62,7 +62,7 @@ public class DialogueManager : MonoBehaviour
             });
 
     }
-    BaseFrameState CreateState(Frame f, Button defaultDialogueButton)
+    BaseFrameState CreateState(Frame f)
     {
         return m_StateFactory.Create(f);
     }
@@ -73,7 +73,7 @@ public class DialogueManager : MonoBehaviour
         // populate maps of states
         foreach (var s in stories.frames)
         {
-            m_Frames[s.id] = CreateState(s, DefaultDialogueButton);
+            m_Frames[s.id] = CreateState(s);
             // initialize start state
             if (m_CurrentState == null && s.type == FrameType.Dialogue)
             {
@@ -111,12 +111,6 @@ public class DialogueManager : MonoBehaviour
     }
     private void Awake()
     {
-        if (DefaultDialogueButton == null)
-        {
-            Debug.LogError("Default Dialogue Button field is not initialized");
-            enabled = false;
-            return;
-        }
         if (Character == null || Replies == null)
         {
             Debug.LogError("Character fields are not initialized");

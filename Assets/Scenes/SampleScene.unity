@@ -761,6 +761,7 @@ GameObject:
   - component: {fileID: 2126333681}
   - component: {fileID: 2126333680}
   - component: {fileID: 2126333682}
+  - component: {fileID: 2126333683}
   m_Layer: 0
   m_Name: DialogueManager
   m_TagString: Untagged
@@ -780,7 +781,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e12b9ed0c3ddc45b9ad2a7911f18e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultDialogueButton: {fileID: 2072900710}
   CharacterText: {fileID: 3852612055588100637}
   Replies: {fileID: 190373116}
   Character: {fileID: 1567621208}
@@ -812,6 +812,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StoryJson: {fileID: 4900000, guid: 25c4527aa59122047b19e6ab3ef20270, type: 3}
+--- !u!114 &2126333683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126333679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f3485687ceb73f49b465365b9a9777d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 2072900710}
 --- !u!1001 &1391624293233426005
 PrefabInstance:
   m_ObjectHideFlags: 0
